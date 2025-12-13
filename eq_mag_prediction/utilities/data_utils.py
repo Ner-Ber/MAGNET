@@ -146,7 +146,7 @@ def concatenate_polyline(polyline):
 
 def smear_binned_magnitudes(
     catalog,
-    discretization_threshold = 0.01,
+    discretization_threshold=0.01,
 ):
   """Eliminates magnitude discretization by uniform adding noise to magnitudes.
 
@@ -175,7 +175,7 @@ def smear_binned_magnitudes(
 
 
 def separate_repeating_times_in_catalog(
-    catalog, orders_of_magnitude = 4
+    catalog, orders_of_magnitude=4
 ):
   """Replaces repeats in 'time' column with values tightly spaced.
 
@@ -244,7 +244,7 @@ def look_for_file(filename):
 
 @gin.configurable
 def scsn_dataframe(
-    csv_path = 'scedc.csv', clean_columns = True
+    csv_path='scedc.csv', clean_columns=True
 ):
   """Fetches a pandas DataFrame of the SCSN earthquake catalog.
 
@@ -273,7 +273,7 @@ def scsn_dataframe(
 
 
 @gin.configurable
-def global_cmt_dataframe(csv_path = 'global_cmt.csv'):
+def global_cmt_dataframe(csv_path='global_cmt.csv'):
   """Fetches a pandas DataFrame of the Global CMT earthquake catalog."""
   df = pd.read_csv(open(look_for_file(csv_path), 'rt'))
   return df.sort_values('time')
@@ -281,7 +281,7 @@ def global_cmt_dataframe(csv_path = 'global_cmt.csv'):
 
 @gin.configurable
 def hauksson_dataframe(
-    csv_path = 'hauksson.csv', clean_columns = True
+    csv_path='hauksson.csv', clean_columns=True
 ):
   """Fetches a pandas DataFrame of the Hauksson earthquake catalog.
 
@@ -305,7 +305,8 @@ def hauksson_dataframe(
             'second',
             'picked_phases',
             'quality',
-        ]
+        ],
+        errors='ignore'
     )
   return separate_repeating_times_in_catalog(
       catalog.drop_duplicates().sort_values('time')
@@ -313,19 +314,19 @@ def hauksson_dataframe(
 
 
 @gin.configurable
-def rsqsim_socal_dataframe(csv_path = 'rsqsim_socal.csv'):
+def rsqsim_socal_dataframe(csv_path='rsqsim_socal.csv'):
   """Fetches a DataFrame of the RSQSim catalog for southern California."""
   return pd.read_csv(open(look_for_file(csv_path), 'rt'))
 
 
 @gin.configurable
-def amatrice_dataframe(csv_path = 'amatrice_catalog.csv'):
+def amatrice_dataframe(csv_path='amatrice_catalog.csv'):
   """Fetches a DataFrame of the Amatrice catalog for central Italy."""
   return pd.read_csv(open(look_for_file(csv_path), 'rt'))
 
 
 @gin.configurable
-def jma_dataframe_from_proto(cdf_path = 'jma.cdf'):
+def jma_dataframe_from_proto(cdf_path='jma.cdf'):
   """Fetches a pandas DataFrame of the JMA earthquake catalog.
 
   Args:
@@ -343,20 +344,20 @@ def jma_dataframe_from_proto(cdf_path = 'jma.cdf'):
 
 
 @gin.configurable
-def jma_dataframe(csv_path = 'jma.csv'):
+def jma_dataframe(csv_path='jma.csv'):
   """Fetches a pandas DataFrame of the JMA earthquake catalog."""
   return pd.read_csv(open(look_for_file(csv_path), 'rt'))
 
 
 @gin.configurable
-def nz_geonet_dataframe(csv_path = 'nz_geonet.csv'):
+def nz_geonet_dataframe(csv_path='nz_geonet.csv'):
   """Fetches a pandas DataFrame of the New Zealand GeoNeT earthquake catalog."""
   return pd.read_csv(open(look_for_file(csv_path), 'rt'))
 
 
 @gin.configurable
 def nz_major_earthquakes_dataframe(
-    csv_path = 'major_earthquakes_nz.csv',
+    csv_path='major_earthquakes_nz.csv',
 ):
   """Fetches a pandas DataFrame of New Zealand's major earthquakes."""
   return pd.read_csv(open(look_for_file(csv_path), 'rt'))
@@ -364,7 +365,7 @@ def nz_major_earthquakes_dataframe(
 
 @gin.configurable
 def japan_major_earthquakes_dataframe(
-    csv_path = 'major_earthquakes_japan.csv',
+    csv_path='major_earthquakes_japan.csv',
 ):
   """Fetches a pandas DataFrame of Japan's major earthquakes."""
   return pd.read_csv(open(look_for_file(csv_path), 'rt'))
@@ -372,7 +373,7 @@ def japan_major_earthquakes_dataframe(
 
 @gin.configurable
 def california_major_earthquakes_dataframe(
-    csv_path = 'major_earthquakes_california.csv',
+    csv_path='major_earthquakes_california.csv',
 ):
   """Fetches a pandas DataFrame of California's major earthquakes."""
   return pd.read_csv(open(look_for_file(csv_path), 'rt'))
@@ -380,7 +381,7 @@ def california_major_earthquakes_dataframe(
 
 @gin.configurable
 def sample_catalog_dataframe(
-    csv_path = 'sample_catalog.csv',
+    csv_path='sample_catalog.csv',
 ):
   """Fetches a pandas DataFrame of a sample earthquake catalog."""
   return pd.read_csv(open(look_for_file(csv_path), 'rt'))
@@ -388,7 +389,7 @@ def sample_catalog_dataframe(
 
 @gin.configurable
 def mock_catalog_dataframe(
-    csv_path = 'mock.csv',
+    csv_path='mock.csv',
 ):
   """Fetches a pandas DataFrame of a mock earthquake catalog."""
   return pd.read_csv(open(look_for_file(csv_path), 'rt'))
